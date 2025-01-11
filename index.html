@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9f5fc;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 15px;
+            }
+            select, button {
+                font-size: 0.9rem;
+            }
+            .output {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Recommendation</h1>
+        <label for="genre">Preferred Genre:</label>
+        <select id="genre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+        </select>
+
+        <label for="duration">Preferred Duration:</label>
+        <select id="duration">
+            <option value="Short">Short (under 90 minutes)</option>
+            <option value="Medium">Medium (90-120 minutes)</option>
+            <option value="Long">Long (over 120 minutes)</option>
+        </select>
+
+        <label for="mood">Mood:</label>
+        <select id="mood">
+            <option value="Happy">Happy</option>
+            <option value="Relaxed">Relaxed</option>
+            <option value="Excited">Excited</option>
+            <option value="Adventurous">Adventurous</option>
+        </select>
+
+        <button onclick="recommendMovie()">Get Recommendation</button>
+
+        <div id="output" class="output" style="display: none;"></div>
+    </div>
+
+    <script>
+        function recommendMovie() {
+            const genre = document.getElementById('genre').value;
+            const duration = document.getElementById('duration').value;
+            const mood = document.getElementById('mood').value;
+
+            const recommendations = {
+                'Comedy_Medium_Happy': "The Grand Budapest Hotel - A quirky comedy with a runtime of 99 minutes, perfect for a happy mood.",
+                'Action_Long_Excited': "Mad Max: Fury Road - A thrilling action movie with breathtaking visuals, great for excitement.",
+                'Drama_Short_Relaxed': "The Pursuit of Happyness - A heartwarming drama under 90 minutes, ideal for a relaxed mood.",
+                'Horror_Short_Excited': "A Quiet Place - A suspenseful horror movie under 90 minutes, perfect for an exciting mood.",
+                'Sci-Fi_Medium_Adventurous': "Interstellar - A mind-bending sci-fi movie that matches an adventurous mood."
+            };
+
+            const key = `${genre}_${duration}_${mood}`;
+            const recommendation = recommendations[key] || "Sorry, we couldn't find a movie matching your preferences.";
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.style.display = 'block';
+            outputDiv.innerText = recommendation;
+        }
+    </script>
+</body>
+</html>
